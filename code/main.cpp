@@ -7,8 +7,8 @@ void print_vector(vector<int> vector){
 	cout << endl;
 }
 int main(){
-	vector<int> vector = { 7, 2, 1, 8, 4, 5, 6, 44, 77, 3};
-	selectionSort(vector);
+	vector<int> vector = { 1, 2, 3, 4, 5, 6, 7, 8};
+	selectionSortOp(vector);
 	print_vector(vector);
 
 };
