@@ -9,5 +9,3 @@ void selectionSort(vector<int>& vector);
 void insertionSort(vector<int>& vector);
 void bubbleSortOp(vector<int> &vector);
 void selectionSortOp(vector<int> &vector);
-int sequencialSearch(vector<int> vector, int elem);
-int binarySearch(vector<int> vector, int elem);
