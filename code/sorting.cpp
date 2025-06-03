@@ -72,7 +72,6 @@ pair<long long, long long> bubbleSortOp(vector<int>& vec){
 		if(!swaped) break;
 	}
 	return {comp, trocas};
-
 }
 
 pair<long long, long long> selectionSortOp(vector<int> &vec){
