@@ -85,6 +85,7 @@ pair<long long, long long> selectionSortOp(vector<int> &vec){
 			if(vec[minimum]>vec[j]) {
 				minimum = j;
 			}
+			comp++;
 			if(vec[j-1]>vec[j]) flag = true;
 		}
 		if(!flag) break;
