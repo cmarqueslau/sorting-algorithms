@@ -35,30 +35,30 @@ void print_vector(vector<int> vector){
 int main(){
 	srand(time(NULL));
 	// ARQUIVO SMALL
-	short small = 11300;
-	cout << endl;
-	cout << YELLOW << "ARQUIVO SMALL ~1 segundo calibrado pelo Bubble Sort" << WHITE << endl;
-	//writeRandomVectorInFile("../data/small_file.bin", small);
-	cout << endl;
+	// short small = 11300;
+	// cout << endl;
+	// cout << YELLOW << "ARQUIVO SMALL ~1 segundo calibrado pelo Bubble Sort" << WHITE << endl;
+	// //writeRandomVectorInFile("../data/small_file.bin", small);
+	// cout << endl;
 	pair<long long, long long> (*funcs[])(std::vector<int>&) = {bubbleSort, bubbleSortOp, selectionSort, selectionSortOp, insertionSort};
 	vector<string> names = {"BubbleSort", "BubbleSortOp", "SelectionSort", "SelectionSortOp", "InsertionSort"};
-	vector<int> vectorSmall;
-	for (short i = 0; i < 5; i++)
-	{
-		vectorSmall = writeVectorFromFile("../data/small_file.bin",  small);
-		diagnosis(vectorSmall, funcs[i], names[i]+" time");
-		cout << endl;
+	// vector<int> vectorSmall;
+	// for (short i = 0; i < 5; i++)
+	// {
+	// 	vectorSmall = writeVectorFromFile("../data/small_file.bin",  small);
+	// 	diagnosis(vectorSmall, funcs[i], names[i]+" time");
+	// 	cout << endl;
 		
-	}
-	writeVectorInFile("../data/small_file_ordered.bin", vectorSmall);
-	cout << endl;
+	// }
+	////writeVectorInFile("../data/small_file_ordered.bin", vectorSmall);
+	// cout << endl;
 
 
-	// ARQUIVO MEDIO
+	// // ARQUIVO MEDIO
 	// unsigned short medium = 59000;
 	// cout << endl;
 	// cout << YELLOW << "ARQUIVO MEDIUM ~30 segundos calibrado pelo Bubble Sort" << WHITE << endl;
-	// writeRandomVectorInFile("../data/medium_file.bin", medium);
+	// //writeRandomVectorInFile("../data/medium_file.bin", medium);
 	// cout << endl;
 	// vector<int> vectorMedium;
 	// for (short i = 0; i < 5; i++)
@@ -68,11 +68,11 @@ int main(){
 	// 	cout << endl;
 		
 	// }
-	// writeVectorInFile("../data/medium_file_ordered.bin", vectorMedium);
+	// //writeVectorInFile("../data/medium_file_ordered.bin", vectorMedium);
 	// cout << endl;
 
 	// ARQUIVOS LARGE
-	int large = 156300;
+	int large = 156320;
 	cout << endl;
 	cout << YELLOW << "ARQUIVO LARGE ~180 segundos calibrado pelo Bubble Sort" << WHITE << endl;
 	writeRandomVectorInFile("../data/large_file.bin", large);

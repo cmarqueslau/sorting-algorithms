@@ -60,6 +60,7 @@
     "vector": "cpp",
     "iostream": "cpp",
     "chrono": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "fstream": "cpp"
   }
 }
