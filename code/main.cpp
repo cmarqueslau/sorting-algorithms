@@ -5,50 +5,87 @@
 #include "data_generator.hpp"
 #include <chrono>   
 using namespace std::chrono;
-void diagnosis(vector<int> vector,  void(*func)(std::vector<int>&), string nome){
-	cout << nome << endl;
+
+#define GREEN "\e[38;5;29m"
+#define FUCHSIA "\e[35;1m"
+#define YELLOW "\e[93;1m"
+#define WHITE "\e[;0m"
+
+void diagnosis(vector<int>& vector,  pair<long long, long long>(*func)(std::vector<int>&), string nome){
+	cout << FUCHSIA << nome << " -> "<< WHITE;
 	auto start = steady_clock::now();
-	func(vector);
+	auto result = func(vector);
 	auto end = steady_clock::now();
 	auto elapsed = end-start;
-	cout << duration_cast<duration<double>>(elapsed).count() << " segundos" << endl;
+	auto duration = duration_cast<nanoseconds>(elapsed).count();
+	double seconds_avg = static_cast<double>(duration) / 1e9;
+	cout << seconds_avg << " segundos" << endl;
+	cout << GREEN <<  "Comparisons -> " << WHITE << result.first << endl;
+	cout << GREEN << "Swaps -> " << WHITE << result.second << endl;
+}
+
+void print_vector(vector<int> vector){
+	for (int i = 0; i < vector.size(); i++)
+	{
+		cout << vector[i] << " -> ";
+	}
+	cout<< endl;
 }
 
 int main(){
 	srand(time(NULL));
 	// ARQUIVO SMALL
-	cout << "ARQUIVO SMALL ~1 segundo calibrado pelo Insertion Sort" << endl;
-	writeVectorInFile("../data/small_file.bin", 25000);
-	vector<int> vectorSmall = writeVectorFromFile("../data/small_file.bin",  25000);
-	diagnosis(vectorSmall, bubbleSort, "BubbleSort time");
-	diagnosis(vectorSmall, selectionSort, "SelectionSort time");
-	diagnosis(vectorSmall, insertionSort, "InsertionSort time");
-	diagnosis(vectorSmall, bubbleSortOp, "BubbleSortOp time");
-	diagnosis(vectorSmall, selectionSortOp, "SelectionSortOp time");
+	short small = 11300;
 	cout << endl;
+	cout << YELLOW << "ARQUIVO SMALL ~1 segundo calibrado pelo Bubble Sort" << WHITE << endl;
+	//writeRandomVectorInFile("../data/small_file.bin", small);
+	cout << endl;
+	pair<long long, long long> (*funcs[])(std::vector<int>&) = {bubbleSort, bubbleSortOp, selectionSort, selectionSortOp, insertionSort};
+	vector<string> names = {"BubbleSort", "BubbleSortOp", "SelectionSort", "SelectionSortOp", "InsertionSort"};
+	vector<int> vectorSmall;
+	for (short i = 0; i < 5; i++)
+	{
+		vectorSmall = writeVectorFromFile("../data/small_file.bin",  small);
+		diagnosis(vectorSmall, funcs[i], names[i]+" time");
+		cout << endl;
+		
+	}
+	writeVectorInFile("../data/small_file_ordered.bin", vectorSmall);
+	cout << endl;
+
 
 	// ARQUIVO MEDIO
-	cout << "ARQUIVO MEDIUM ~30 segundos calibrado pelo Insertion Sort" << endl;
-	writeVectorInFile("../data/medium_file.bin", 100000);
-	vector<int> vectorMedium = writeVectorFromFile("../data/medium_file.bin",  100000);
-	diagnosis(vectorMedium, bubbleSort, "BubbleSort time");
-	diagnosis(vectorMedium, selectionSort, "SelectionSort time");
-	diagnosis(vectorMedium, insertionSort, "InsertionSort time");
-	diagnosis(vectorMedium, bubbleSortOp, "BubbleSortOp time");
-	diagnosis(vectorMedium, selectionSortOp, "SelectionSortOp time");
-	cout << endl;
+	// unsigned short medium = 59000;
+	// cout << endl;
+	// cout << YELLOW << "ARQUIVO MEDIUM ~30 segundos calibrado pelo Bubble Sort" << WHITE << endl;
+	// writeRandomVectorInFile("../data/medium_file.bin", medium);
+	// cout << endl;
+	// vector<int> vectorMedium;
+	// for (short i = 0; i < 5; i++)
+	// {
+	// 	vectorMedium = writeVectorFromFile("../data/medium_file.bin",  medium);
+	// 	diagnosis(vectorMedium, funcs[i], names[i]+" time");
+	// 	cout << endl;
+		
+	// }
+	// writeVectorInFile("../data/medium_file_ordered.bin", vectorMedium);
+	// cout << endl;
 
-
-	// ARQUIVOS SMALL
-	cout << "ARQUIVO LARGE ~180 segundos calibrado pelo Insertion Sort" << endl;
-	writeVectorInFile("../data/large_file.bin", 250000);
-	vector<int> vectorLarge = writeVectorFromFile("../data/large_file.bin",  250000);
-	diagnosis(vectorLarge, bubbleSort, "BubbleSort time");
-	diagnosis(vectorLarge, selectionSort, "SelectionSort time");
-	diagnosis(vectorLarge, insertionSort, "InsertionSort time");
-	diagnosis(vectorLarge, bubbleSortOp, "BubbleSortOp time");
-	diagnosis(vectorLarge, selectionSortOp, "SelectionSortOp time");
+	// ARQUIVOS LARGE
+	int large = 156300;
 	cout << endl;
+	cout << YELLOW << "ARQUIVO LARGE ~180 segundos calibrado pelo Bubble Sort" << WHITE << endl;
+	writeRandomVectorInFile("../data/large_file.bin", large);
+	cout << endl;
+	vector<int> vectorLarge;
+	for (short i = 0; i < 5; i++)
+	{
+		vectorLarge = writeVectorFromFile("../data/large_file.bin", large);
+		diagnosis(vectorLarge, funcs[i], names[i]+" time");
+		cout << endl;
+		
+	}
+	writeVectorInFile("../data/large_file_ordered.bin", vectorLarge);
 
 
 };

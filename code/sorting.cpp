@@ -1,62 +1,101 @@
-#include <iostream>
 #include "sorting.hpp"
 
-void bubbleSort(vector<int>& vector){
-	for (int i = 0; i < vector.size(); i++){
-		for (int j = 0; j < vector.size()-1; j++){
-			if(vector[j]>vector[j+1]) swap(vector[j], vector[j+1]);
+pair<long long, long long> bubbleSort(vector<int>& vec){
+	long long comp = 0;
+	long long trocas = 0;
+	for (size_t i = 0; i < vec.size(); i++){
+		for (size_t j = 0; j < vec.size()-1-i; j++){
+			comp++;
+			if(vec[j]>vec[j+1]){
+				trocas++;
+				swap(vec[j], vec[j+1]);
+			} 
 		}
 	}
+	return {comp, trocas};
+
 }
-void selectionSort(vector<int>& vector){
-	for (int i = 0; i < vector.size()-1; i++){
+
+pair<long long, long long> selectionSort(vector<int>& vec){
+	long long comp = 0;
+	long long trocas = 0;
+	for (size_t i = 0; i < vec.size()-1; i++){
 		int minimum = i;
-		for (int j = i+1; j < vector.size(); j++){
-			if(vector[minimum]>vector[j]) {
+		for (size_t j = i+1; j < vec.size(); j++){
+			comp++;
+			if(vec[minimum]>vec[j]) {
 				minimum = j;
 			}
 		}
-		int troca = vector[i];
-		vector[i] = vector[minimum];
-		vector[minimum] = troca;
+		if(i!=minimum){
+			trocas++;
+			int troca = vec[i];
+			vec[i] = vec[minimum];
+			vec[minimum] = troca;
+		}
 	}
+	return {comp, trocas};
 }
-void insertionSort(vector<int>& vector){
-    for (int i = 1; i < vector.size(); i++){
-		int key = vector[i];
+
+pair<long long, long long> insertionSort(vector<int>& vec){
+	long long comp = 0;
+	long long trocas = 0;
+    for (size_t i = 1; i < vec.size(); i++){
+		int key = vec[i];
 		int j = i-1;
-		while (j >= 0 && key<vector[j]){
-			vector[j+1] = vector[j];
+		comp++;
+		while (j >= 0 && key<vec[j]){
+			comp++;
+			vec[j+1] = vec[j];
+			trocas++;
 			j--;
 		}
-		vector[j+1] = key;
+		trocas++;
+		vec[j+1] = key;
 	}
+	return {comp, trocas};
 }
-void bubbleSortOp(vector<int> &vector){
-	int swaped = 0;
-    for (int i = 0; i < vector.size(); i++){
-		for (int j = 0; j < vector.size()-1; j++){
-			if(vector[j]>vector[j+1]){
-				swap(vector[j], vector[j+1]);
-				swaped = 1;
-			}
+
+pair<long long, long long> bubbleSortOp(vector<int>& vec){
+	long long comp = 0;
+	long long trocas = 0;
+	for (size_t i = 0; i < vec.size(); i++){
+		bool swaped = false;
+		for (size_t j = 0; j < vec.size()-1-i; j++){
+			comp++;
+			if(vec[j]>vec[j+1]){
+				trocas++;
+				swap(vec[j], vec[j+1]);
+				swaped = true;
+			} 
 		}
-		if(swaped==0) break;
+		if(!swaped) break;
 	}
+	return {comp, trocas};
+
 }
-void selectionSortOp(vector<int> &vector){
-	int flag = 0;
-    for (int i = 0; i < vector.size()-1; i++){
+
+pair<long long, long long> selectionSortOp(vector<int> &vec){
+	long long comp = 0;
+	long long trocas = 0;
+	for (size_t i = 0; i < vec.size()-1; i++){
+	    	bool flag = false;
 		int minimum = i;
-		for (int j = i+1; j < vector.size(); j++){
-			if(vector[minimum]>vector[j]) {
+		for (size_t j = i+1; j < vec.size(); j++){
+			comp++;
+			if(vec[minimum]>vec[j]) {
 				minimum = j;
 			}
-			if(vector[j-1]>vector[j]) flag = 1;
+			if(vec[j-1]>vec[j]) flag = true;
 		}
 		if(!flag) break;
-		int troca = vector[i];
-		vector[i] = vector[minimum];
-		vector[minimum] = troca;
+		if(i!=minimum){
+			trocas++;
+			int troca = vec[i];
+			vec[i] = vec[minimum];
+			vec[minimum] = troca;
+		}
 	}
+	return {comp, trocas};
 }
+

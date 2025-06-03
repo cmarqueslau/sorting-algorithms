@@ -4,5 +4,6 @@
 #include <vector>
 #include <cstdlib>
 using namespace std;
-void writeVectorInFile(string filepath, int vectorSize);
+void writeRandomVectorInFile(string filepath, int vectorSize);
+void writeVectorInFile(string filepath, vector<int> vector);
 vector<int> writeVectorFromFile(string filepath, int vectorSize);
