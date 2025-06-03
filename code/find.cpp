@@ -1,25 +1,25 @@
 #include <iostream>
 #include "find.hpp"
-int sequencialSearch(vector<int> vector, int elem){
-	for (int i = 0; i < vector.size(); i++)
+pair<int, long long> sequencialSearch(vector<int> vec, int elem){
+	long long comp = 0;
+	for (int i = 0; i < vec.size(); i++)
 	{
-		if(vector[i]==elem) return i; 
+		comp++;
+		if(vec[i]==elem) return {i, comp}; 
 	}
-	return -1;
+	return {-1, comp};
 }
-int binarySearch(vector<int> vector, int elem){
+pair<int, long long> binarySearch(vector<int> vec, int elem){
 	int start = 0;
-	int end = vector.size()-1;
+	long long comp = 0;
+	int end = vec.size()-1;
 	while(start<=end){
 		int half = (end-start)/2+start;
-		if(elem>vector[half]) start = half;
-		else if (elem<vector[half]) end = half;
-		else {
-			if(elem==vector[start]) return start;
-			if(elem==vector[end]) return end;
-			if(elem==vector[half]) return half;
-		}
+		comp++;
+		if(elem>vec[half]) start = half + 1;
+		else if (elem<vec[half]) end = half - 1;
+		else return {half, comp};
 	}
-	return -1;
+	return {-1, comp};
 }
 ;
