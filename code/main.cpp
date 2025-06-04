@@ -68,7 +68,7 @@ int main(){
 	cout << endl;
 
 
-	// // ARQUIVO MEDIO
+	// ARQUIVO MEDIO
 	unsigned short medium = 59000;
 	cout << endl;
 	cout << YELLOW << "ARQUIVO MEDIUM ~30 segundos calibrado pelo Bubble Sort" << WHITE << endl;
